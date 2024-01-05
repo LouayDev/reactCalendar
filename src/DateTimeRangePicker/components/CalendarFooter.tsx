@@ -1,4 +1,4 @@
-import { ActionNames } from "../context/DTRPProvider";
+import { ActionNames } from "../constants/DTRP_types";
 import { useDTRP } from "../hooks/useDTRP";
 
 export default function CalendarFooter() {

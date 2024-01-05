@@ -1,4 +1,4 @@
-import { type Shortcuts, ActionNames } from "../context/DTRPProvider";
+import { type Shortcuts, ActionNames } from "../constants/DTRP_types";
 import { sub } from "date-fns";
 import TimeSelector from "./TimeSelector";
 import { useDTRP } from "../hooks/useDTRP";

@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import Shortcuts from "./Shortcuts";
-import { ActionNames } from "../context/DTRPProvider";
+import { ActionNames } from "../context/DTRP_Provider";
 import { useDTRP } from "../hooks/useDTRP";
 import {
   addMonths,

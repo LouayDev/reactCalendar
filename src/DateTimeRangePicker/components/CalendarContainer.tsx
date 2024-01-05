@@ -1,7 +1,7 @@
 import CalendarButton from "./CalendarButton";
 import Calendar from "./Calendar";
 import { useDTRP } from "../hooks/useDTRP";
-import { ActionNames } from "../context/DTRPProvider";
+import { ActionNames } from "../constants/DTRP_types";
 import { useEffect } from "react";
 
 type CalendarContainerProps = {

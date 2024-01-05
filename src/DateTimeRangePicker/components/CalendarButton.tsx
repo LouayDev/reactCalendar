@@ -1,5 +1,5 @@
 import CalendarIcon from "./../../assets/calendar.png";
-import { ActionNames } from "../context/DTRPProvider";
+import { ActionNames } from "../constants/DTRP_types";
 import { useDTRP } from "../hooks/useDTRP";
 
 import { format } from "date-fns";

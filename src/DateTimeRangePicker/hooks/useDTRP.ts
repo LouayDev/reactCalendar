@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DTRPContext } from "../context/DTRPProvider";
+import { DTRPContext } from "../context/DTRP_Provider";
 
 export function useDTRP() {
   const context = useContext(DTRPContext);

@@ -1,4 +1,4 @@
-import DTRP_ContextProvider from "../context/DTRPProvider";
+import DTRP_ContextProvider from "../context/DTRP_Provider";
 import CalendarContainer from "./CalendarContainer";
 
 type DTRP_Props = {

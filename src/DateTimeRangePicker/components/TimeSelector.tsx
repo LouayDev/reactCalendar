@@ -4,7 +4,7 @@ import { ReactNode, useMemo, useState } from "react";
 import { Popover } from "@headlessui/react";
 import { useDTRP } from "../hooks/useDTRP";
 
-import { ActionNames } from "../context/DTRPProvider";
+import { ActionNames } from "../constants/DTRP_types";
 
 export default function TimeSelector({
   isStartTime,
