@@ -1,6 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
 import Shortcuts from "./Shortcuts";
-import { ActionNames } from "../constants/DTRP_types";
 import { useDTRP } from "../hooks/useDTRP";
 import {
   addMonths,
@@ -20,9 +19,9 @@ import RightArrow from "../../assets/rightArrow.svg";
 import CalendarFooter from "./CalendarFooter";
 
 export default function Calendar({ close }: { close: () => void }) {
-  const { state, dispatch } = useDTRP();
-  const startDate = state.startDate;
-  const endDate = state.endDate;
+  const { DTRP_State, setDateTimeRange } = useDTRP();
+  const startDate = DTRP_State.DateTimeRange[0];
+  const endDate = DTRP_State.DateTimeRange[0];
   const [visibleMonths, setVisibleMonths] = useState<Date>(
     startDate ?? new Date()
   );
@@ -126,7 +125,7 @@ export default function Calendar({ close }: { close: () => void }) {
                   return (
                     <button
                       key={date.toString()}
-                      onClick={() => handleSelectDate(date)}
+                      onClick={() => setDateTimeRange(date)}
                       className={`rounded-md relative p-2 hover:bg-green-100  ${
                         !isSameMonth(date, visibleMonths) && "text-gray-400"
                       }
