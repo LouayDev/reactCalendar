@@ -1,9 +1,8 @@
 export type Shortcuts = "hours" | "weeks" | "months" | "years" | undefined;
 
 export type DTRP_State = {
-  startDate: Date | undefined;
-  endDate: Date | undefined;
-  selectedShortcut: Shortcuts;
+  DateTimeRange: [Date | undefined, Date | undefined];
+  Shortcut: Shortcuts;
 };
 
 export enum ActionNames {

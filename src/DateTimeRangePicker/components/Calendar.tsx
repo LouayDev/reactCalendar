@@ -58,46 +58,6 @@ export default function Calendar({ close }: { close: () => void }) {
     return [new Date().getTime()];
   }, [endDate, startDate]);
 
-  const handleSelectDate = (date: Date): void => {
-    if (!startDate && !endDate) {
-      dispatch({
-        type: ActionNames.SET_START_DATE,
-        payload: date,
-      });
-      return;
-    }
-    if (startDate && endDate) {
-      dispatch({
-        type: ActionNames.SET_START_DATE,
-        payload: date,
-      });
-
-      dispatch({
-        type: ActionNames.SET_END_DATE,
-        payload: undefined,
-      });
-
-      return;
-    }
-
-    if (startDate && !endDate) {
-      dispatch({
-        type: ActionNames.SET_END_DATE,
-        payload: date,
-      });
-
-      return;
-    }
-
-    if (!startDate && endDate) {
-      dispatch({
-        type: ActionNames.SET_START_DATE,
-        payload: date,
-      });
-
-      return;
-    }
-  };
   const handleIsSameDay = (date: Date): boolean => {
     if (startDate) {
       if (isSameDay(date, startDate)) {
