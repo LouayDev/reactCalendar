@@ -13,6 +13,7 @@ export const DTRPContext = createContext<{
   setDateTimeRange: (date: Date) => void;
   setShortcut: (shortcut: Shortcuts) => void;
   reset: () => void;
+  SetDTRP_State: React.Dispatch<React.SetStateAction<DTRP_State>>;
 } | null>(null);
 
 type contextProps = {
@@ -63,7 +64,13 @@ export default function DTRP_ContextProvider({ children }: contextProps) {
 
   return (
     <DTRPContext.Provider
-      value={{ DTRP_State, setDateTimeRange, setShortcut, reset }}
+      value={{
+        DTRP_State,
+        setDateTimeRange,
+        setShortcut,
+        reset,
+        SetDTRP_State,
+      }}
     >
       {children}
     </DTRPContext.Provider>

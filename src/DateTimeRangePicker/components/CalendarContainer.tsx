@@ -2,7 +2,6 @@
 import CalendarButton from "./CalendarButton";
 import Calendar from "./Calendar";
 import { useDTRP } from "../hooks/useDTRP";
-import { ActionNames } from "../constants/DTRP_types";
 import { useEffect } from "react";
 import { Popover } from "@headlessui/react";
 
@@ -14,11 +13,12 @@ export default function CalendarContainer({
   startDate,
   endDate,
 }: CalendarContainerProps) {
-  const { dispatch } = useDTRP();
+  const { SetDTRP_State } = useDTRP();
 
   useEffect(() => {
-    dispatch({ type: ActionNames.SET_START_DATE, payload: startDate });
-    dispatch({ type: ActionNames.SET_END_DATE, payload: endDate });
+    SetDTRP_State((prev) => {
+      return { ...prev, DateTimeRange: [startDate, endDate] };
+    });
   }, []);
 
   return (
