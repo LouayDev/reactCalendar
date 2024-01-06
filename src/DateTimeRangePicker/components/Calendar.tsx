@@ -151,7 +151,6 @@ export default function Calendar({ close }: { close: () => void }) {
             </button>
           </div>
           <div className="flex gap-4">
-            {/* first calendar =========================================================*/}
             <div className=" rounded-md p-2 flex flex-col gap-4  ">
               <div className="flex gap-4 text-sm justify-center font-medium pb-2 border-b text-gray-700">
                 <span>Sun</span>
@@ -187,7 +186,6 @@ export default function Calendar({ close }: { close: () => void }) {
                 })}
               </div>
             </div>
-            {/*=========================================================================*/}
           </div>
         </div>
       </div>

@@ -9,7 +9,6 @@ const DefaultDTRP_State: DTRP_State = {
   startDate: undefined,
   endDate: undefined,
   selectedShortcut: undefined,
-  isOpen: false,
 };
 
 export const DTRPContext = createContext<{
@@ -28,7 +27,7 @@ const DTRP_Reducer = (state: DTRP_State, actions: Actions): DTRP_State => {
     case ActionNames.SET_END_DATE:
       return { ...state, endDate: payload };
     case ActionNames.RESET:
-      return { ...DefaultDTRP_State, isOpen: true };
+      return { ...DefaultDTRP_State };
     default:
       return state;
   }

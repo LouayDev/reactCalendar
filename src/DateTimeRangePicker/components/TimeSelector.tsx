@@ -53,19 +53,24 @@ export default function TimeSelector({
 
   return (
     <Popover className="relative grow">
-      <Popover.Button className="flex text-sm  w-full gap-2 px-2 justify-betweenbg-gray-50 items-center rounded-md border shadow-sm w-full py-1 hover:bg-gray-100 active:bg-gray-50 active:shadow-none focus:bg-gray-100">
+      <Popover.Button className="flex text-sm  w-full gap-2 px-2 justify-betweenbg-gray-50 items-center rounded-md border shadow-sm py-1 hover:bg-gray-100 active:bg-gray-50 active:shadow-none focus:bg-gray-100">
         <span className="grow">
           {format(startDate ? startDate : new Date(), "hh : mm")}
         </span>
         <img src={Clock} alt="clock-icon" className="w-4" />
       </Popover.Button>
-      <TimeDropDown
-        setlectedMinute={setlectedMinute}
-        selectedHour={selectedHour}
-        handleSubmit={handleSubmit}
-        handleSelectHour={handleSelectHour}
-        handleSelectMinute={handleSelectMinute}
-      />
+      <Popover.Panel>
+        {({ close }) => (
+          <TimeDropDown
+            close={close}
+            setlectedMinute={setlectedMinute}
+            selectedHour={selectedHour}
+            handleSubmit={handleSubmit}
+            handleSelectHour={handleSelectHour}
+            handleSelectMinute={handleSelectMinute}
+          />
+        )}
+      </Popover.Panel>
     </Popover>
   );
 }
@@ -74,6 +79,7 @@ type TimeDropDown = {
   handleSelectHour: (hour: number) => void;
   handleSelectMinute: (hour: number) => void;
   handleSubmit: () => void;
+  close: () => void;
   selectedHour: number;
   setlectedMinute: number;
 };
@@ -83,6 +89,7 @@ function TimeDropDown({
   handleSelectMinute,
   selectedHour,
   setlectedMinute,
+  close,
 }: TimeDropDown) {
   const hours: number[] = useMemo(() => {
     return Array.from({ length: 24 }, (_, index): number => index);
@@ -93,7 +100,7 @@ function TimeDropDown({
   }, []);
 
   return (
-    <Popover.Panel className="absolute bg-gray-50 border shadow-sm w-full h-60 z-50 rounded-md top-10 p-2 flex flex-col justify-between">
+    <div className="absolute bg-gray-50 border shadow-sm w-full h-60 z-50 rounded-md top-10 p-2 flex flex-col justify-between">
       <div className="grow h-3/4 flex justify-around">
         <div className="flex flex-col overflow-scroll cursor-pointer">
           {hours.map((hour: number): ReactNode => {
@@ -131,12 +138,15 @@ function TimeDropDown({
 
       <div className="pt-3 w-full">
         <button
-          onClick={handleSubmit}
+          onClick={() => {
+            close();
+            handleSubmit();
+          }}
           className="rounded-md w-full bg-blue-500 hover:bg-blue-600 py-1 active:bg-blue-500 text-white px-2"
         >
           submit
         </button>
       </div>
-    </Popover.Panel>
+    </div>
   );
 }
