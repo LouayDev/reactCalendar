@@ -5,8 +5,9 @@ import { format } from "date-fns";
 // import { useMemo } from "react";
 
 export default function CalendarButton() {
-  const { state } = useDTRP();
-  const { endDate, startDate } = state;
+  const { DTRP_State } = useDTRP();
+  const startDate = DTRP_State.DateTimeRange[0];
+  const endDate = DTRP_State.DateTimeRange[1];
 
   return (
     <div className="flex gap-2">
