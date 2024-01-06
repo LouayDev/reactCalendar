@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useReducer, ReactNode, Dispatch } from "react";
 import { DTRP_State, ActionNames, Actions } from "../constants/DTRP_types";
 // import {
@@ -20,10 +21,6 @@ const DTRP_Reducer = (state: DTRP_State, actions: Actions): DTRP_State => {
   const { type, payload } = actions as Actions;
 
   switch (type) {
-    case ActionNames.OPEN_CLOSE:
-      return { ...state, isOpen: !state.isOpen };
-    case ActionNames.CLOSE:
-      return { ...state, isOpen: false };
     case ActionNames.SELECT_SHORTCUT:
       return { ...state, selectedShortcut: payload };
     case ActionNames.SET_START_DATE:

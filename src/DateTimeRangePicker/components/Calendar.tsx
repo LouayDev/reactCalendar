@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import Shortcuts from "./Shortcuts";
-import { ActionNames } from "../context/DTRP_Provider";
+import { ActionNames } from "../constants/DTRP_types";
 import { useDTRP } from "../hooks/useDTRP";
 import {
   addMonths,
@@ -19,7 +19,7 @@ import LeftArrow from "../../assets/leftArrow.svg";
 import RightArrow from "../../assets/rightArrow.svg";
 import CalendarFooter from "./CalendarFooter";
 
-export default function Calendar() {
+export default function Calendar({ close }: { close: () => void }) {
   const { state, dispatch } = useDTRP();
   const startDate = state.startDate;
   const endDate = state.endDate;
@@ -127,7 +127,7 @@ export default function Calendar() {
   };
 
   return (
-    <div className="absolute  min-w-full bg-gray-50 shadow-sm border rounded-md top-20 p-2 flex flex-col gap-3">
+    <div className="absolute min-w-full bg-gray-50 shadow-sm border rounded-md top-4 p-2 flex flex-col gap-3">
       <div className="flex gap-3 ">
         <Shortcuts />
         <div className="select-none flex flex-col gap-4">
@@ -191,7 +191,7 @@ export default function Calendar() {
           </div>
         </div>
       </div>
-      <CalendarFooter />
+      <CalendarFooter close={close} />
     </div>
   );
 }

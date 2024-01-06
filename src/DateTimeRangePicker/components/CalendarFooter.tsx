@@ -1,15 +1,8 @@
 import { ActionNames } from "../constants/DTRP_types";
 import { useDTRP } from "../hooks/useDTRP";
 
-export default function CalendarFooter() {
+export default function CalendarFooter({ close }: { close: () => void }) {
   const { dispatch } = useDTRP();
-  const handleSubmitCalendar = () => {
-    dispatch({ type: ActionNames.CLOSE, payload: null });
-  };
-
-  const handleCancelCalendar = () => {
-    dispatch({ type: ActionNames.CLOSE, payload: null });
-  };
 
   const handleResetCalendar = () => {
     dispatch({ type: ActionNames.RESET, payload: null });
@@ -24,13 +17,13 @@ export default function CalendarFooter() {
       </button>
       <div className="flex gap-2">
         <button
-          onClick={handleCancelCalendar}
+          onClick={() => close()}
           className="text-gray-700  px-3 py-1 rounded-md hover:bg-gray-100 "
         >
           cancel
         </button>
         <button
-          onClick={handleSubmitCalendar}
+          onClick={() => close()}
           className="rounded-md px-3 py-1 shadow bg-green-600 text-white hover:bg-green-700 active:shadow-none active:bg-green-600"
         >
           submit
