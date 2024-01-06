@@ -1,16 +1,12 @@
-import { ActionNames } from "../constants/DTRP_types";
 import { useDTRP } from "../hooks/useDTRP";
 
 export default function CalendarFooter({ close }: { close: () => void }) {
-  const { dispatch } = useDTRP();
+  const { reset } = useDTRP();
 
-  const handleResetCalendar = () => {
-    dispatch({ type: ActionNames.RESET, payload: null });
-  };
   return (
     <div className="flex justify-between item gap-3 pt-3 select-none border-t">
       <button
-        onClick={handleResetCalendar}
+        onClick={reset}
         className="rounded-md px-3 py-1 border text-gray-700  hover:bg-gray-100 active:shadow-none active:bg-gray-200"
       >
         reset
