@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, ReactNode, useState } from "react";
 import { DTRP_State, Shortcuts } from "../constants/DTRP_types";
-import { sub } from "date-fns";
+import { setHours, setMinutes, sub } from "date-fns";
 
 const DefaultDTRP_State: DTRP_State = {
   DateTimeRange: [undefined, undefined],
@@ -14,6 +14,15 @@ export const DTRPContext = createContext<{
   setShortcut: (shortcut: Shortcuts) => void;
   reset: () => void;
   SetDTRP_State: React.Dispatch<React.SetStateAction<DTRP_State>>;
+  setTime: ({
+    isStartTime,
+    selectedHour,
+    setlectedMinute,
+  }: {
+    isStartTime: boolean;
+    selectedHour: number;
+    setlectedMinute: number;
+  }) => void;
 } | null>(null);
 
 type contextProps = {
@@ -58,6 +67,46 @@ export default function DTRP_ContextProvider({ children }: contextProps) {
     }
   };
 
+  const setTime = ({
+    isStartTime,
+    selectedHour,
+    setlectedMinute,
+  }: {
+    isStartTime: boolean;
+    selectedHour: number;
+    setlectedMinute: number;
+  }): void => {
+    const newArray: [Date | undefined, Date | undefined] = [
+      ...DTRP_State.DateTimeRange,
+    ];
+    if (DTRP_State.DateTimeRange[0] && isStartTime) {
+      const newDateWithTime: Date = setMinutes(
+        setHours(newArray[0] as Date, selectedHour),
+        setlectedMinute
+      );
+      newArray[0] = newDateWithTime;
+      SetDTRP_State((prev) => {
+        return { ...prev, DateTimeRange: newArray };
+      });
+
+      return;
+    }
+
+    if (DTRP_State.DateTimeRange[0]) {
+      const newDateWithTime: Date = setMinutes(
+        setHours(newArray[1] as Date, selectedHour),
+        setlectedMinute
+      );
+      newArray[1] = newDateWithTime;
+
+      SetDTRP_State((prev) => {
+        return { ...prev, DateTimeRange: newArray };
+      });
+
+      return;
+    }
+  };
+
   const reset = (): void => {
     SetDTRP_State(DefaultDTRP_State);
   };
@@ -69,6 +118,7 @@ export default function DTRP_ContextProvider({ children }: contextProps) {
         setDateTimeRange,
         setShortcut,
         reset,
+        setTime,
         SetDTRP_State,
       }}
     >

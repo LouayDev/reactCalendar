@@ -1,22 +1,19 @@
-import { setHours, setMinutes, format } from "date-fns";
-import Clock from "../../assets/clock.png";
+import { format } from "date-fns";
 import { ReactNode, useMemo, useState } from "react";
 import { Popover } from "@headlessui/react";
 import { useDTRP } from "../hooks/useDTRP";
-
-import { ActionNames } from "../constants/DTRP_types";
+import Clock from "../../assets/clock.png";
 
 export default function TimeSelector({
   isStartTime,
 }: {
   isStartTime: boolean;
 }) {
-  const { state, dispatch } = useDTRP();
-  const { endDate, startDate } = state;
+  const { setTime } = useDTRP();
+  const startDate = useDTRP().DTRP_State.DateTimeRange[0];
 
   const [selectedHour, setSelectedHour] = useState<number>(1);
   const [setlectedMinute, setSelectedMinute] = useState<number>(1);
-  console.log(setlectedMinute);
 
   const handleSelectHour = (hour: number): void => {
     setSelectedHour(hour);
@@ -27,28 +24,7 @@ export default function TimeSelector({
   };
 
   const handleSubmit = (): void => {
-    if (isStartTime && startDate) {
-      const newDateWithTime: Date = setMinutes(
-        setHours(startDate, selectedHour),
-        setlectedMinute
-      );
-      dispatch({
-        type: ActionNames.SET_START_DATE,
-        payload: newDateWithTime,
-      });
-    }
-
-    if (!isStartTime && endDate) {
-      const newDateWithTime: Date = setMinutes(
-        setHours(endDate, selectedHour),
-        setlectedMinute
-      );
-
-      dispatch({
-        type: ActionNames.SET_END_DATE,
-        payload: newDateWithTime,
-      });
-    }
+    setTime({ isStartTime, selectedHour, setlectedMinute });
   };
 
   return (
