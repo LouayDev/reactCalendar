@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import Shortcuts from "./Shortcuts";
 import { useDTRP } from "../hooks/useDTRP";
 import {
@@ -21,7 +21,7 @@ import CalendarFooter from "./CalendarFooter";
 export default function Calendar({ close }: { close: () => void }) {
   const { DTRP_State, setDateTimeRange } = useDTRP();
   const startDate = DTRP_State.DateTimeRange[0];
-  const endDate = DTRP_State.DateTimeRange[0];
+  const endDate = DTRP_State.DateTimeRange[1];
   const [visibleMonths, setVisibleMonths] = useState<Date>(
     startDate ?? new Date()
   );
@@ -32,8 +32,6 @@ export default function Calendar({ close }: { close: () => void }) {
       end: endOfWeek(endOfMonth(visibleMonths)),
     });
   }, [visibleMonths]);
-
-  useEffect(() => {}, [startDate]);
 
   const hilightedRange = useMemo(() => {
     if (startDate && endDate) {
